@@ -20,7 +20,10 @@ router.get('/', async (req, res) => {
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       posts, 
-      logged_in: req.session.logged_in 
+      logged_in: req.session.logged_in,
+      homeActive: true,
+      dashActive: false,
+      loginActive: false
     });
   } catch (err) {
     res.status(500).json(err);
@@ -42,7 +45,10 @@ router.get('/post/:id', async (req, res) => {
 
     res.render('post', {
       ...post,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      homeActive: false,
+      dashActive: false,
+      loginActive: false
     });
   } catch (err) {
     res.status(500).json(err);
@@ -62,7 +68,10 @@ router.get('/profile', withAuth, async (req, res) => {
 
     res.render('profile', {
       ...user,
-      logged_in: true
+      logged_in: true,
+      homeActive: false,
+      dashActive: true,
+      loginActive: false
     });
   } catch (err) {
     res.status(500).json(err);
@@ -76,7 +85,11 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('login', {
+    homeActive: false,
+    dashActive: false,
+    loginActive: true
+  });
 });
 
 module.exports = router;
