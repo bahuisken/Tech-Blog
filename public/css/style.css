@@ -1,0 +1,22 @@
+.post-title-link {
+  color: #ffffff;
+}
+
+.post-title-link:hover {
+  color: #d9d9d9;
+}
+
+.no-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #1b89bc;
+  text-decoration: none;
+  font-size: 100%;
+}
+
+.no-button:hover {
+  color: #065b83;
+  text-decoration: underline;
+}

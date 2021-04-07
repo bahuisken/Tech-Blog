@@ -1,0 +1,15 @@
+{{#each posts as |post| }}
+{{{get_borderBg}}}
+<div class="container">
+  <div class="row">
+    <div class="font-weight-bold col-6"><a class="post-title-link" href="/post/{{post.id}}">{{post.title}}</a></div>
+    <div class="text-right col-6 font-weight-light text-monospace">Posted by {{post.user.name}} on {{format_date
+      post.date_created}}</div>
+  </div>
+</div>
+</div>
+<div class="card-body text-dark">
+  <p class="card-text">{{post.content}}</p>
+</div>
+</div>
+{{/each}}
