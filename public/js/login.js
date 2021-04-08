@@ -18,7 +18,7 @@ const loginFormHandler = async (event) => {
       document.location.replace('/dashboard');
       
     } else {
-      alert(response.statusText);
+      document.querySelector('#login-error').textContent = 'ACCOUNT NOT FOUND';
     }
   }
 };
@@ -44,6 +44,21 @@ const signupFormHandler = async (event) => {
     }
   }
 };
+const createAccountHandler =  () => {
+  document.querySelector('#create-account-form').style.display = 'block';
+  document.querySelector('#login-form').style.display = 'none';
+  document.querySelector('#name-signup').value = '';
+  document.querySelector('#email-signup').value = '';
+  document.querySelector('#password-signup').value = '';
+};
+
+const loginBtnHandler =  () => {
+  document.querySelector('#create-account-form').style.display = 'none';
+  document.querySelector('#login-form').style.display = 'block';
+  document.querySelector('#login-error').textContent = '';
+  document.querySelector('#email-login').value = '';
+  document.querySelector('#password-login').value = '';
+};
 
 document
   .querySelector('.login-form')
@@ -52,3 +67,11 @@ document
 document
   .querySelector('.signup-form')
   .addEventListener('submit', signupFormHandler);
+
+  document
+  .querySelector('#create-account-btn')
+  .addEventListener('click', createAccountHandler);
+
+  document
+  .querySelector('#login-btn')
+  .addEventListener('click', loginBtnHandler);

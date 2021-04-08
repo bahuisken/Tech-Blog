@@ -7,6 +7,7 @@ module.exports = {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
   },
+  
   get_borderBg: () => {
     const randomNum = Math.random();
     let borderBg = "primary";

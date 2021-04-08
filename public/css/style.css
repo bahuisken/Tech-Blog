@@ -20,3 +20,12 @@
   color: #065b83;
   text-decoration: underline;
 }
+
+#create-account-form {
+  display: none;
+}
+
+#login-error {
+  color: #ff0000;
+  font-weight: bold;
+}
