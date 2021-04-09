@@ -1,0 +1,29 @@
+{{{get_borderBg}}}
+<div class="container">
+  <div class="row">
+    <div class="font-weight-bold col-6">Edit Your Post - "{{title}}"</div>
+    <div class="text-right col-6 font-weight-light text-monospace">Posted on {{format_date
+      date_created}}</div>
+  </div>
+</div>
+</div>
+<div class="card-body text-dark">
+  <form class="form edit-post-form">
+    <input type="hidden" id="edit-id" name="edit-id" value="{{id}}">
+    <div class="form-group">
+      <label for="edit-title" class="font-weight-bold">Edit Title:</label>
+      <input type="text" class="form-control" id="edit-title" name="edit-title" value="{{title}}">
+    </div>
+    <div class="form-group">
+      <label for="edit-content" class="font-weight-bold">Edit Content:</label>
+      <textarea class="form-control" id="edit-content" name="edit-content" rows="3">{{content}}</textarea>
+    </div>
+    <div class="form-group post-btns">
+      <button type="submit" class="btn btn-info"><i class="fas fa-save"></i> Update Post</button> <button
+        class="btn btn-danger" post-id="{{id}}"><i class="fas fa-trash-alt"></i> Delete Post</button>
+    </div>
+  </form>
+</div>
+</div>
+
+<script src="../js/edit-post.js"></script>

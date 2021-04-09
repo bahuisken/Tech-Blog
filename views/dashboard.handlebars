@@ -1,6 +1,6 @@
 <div class="row mt-4">
   {{#if posts.length}}
-  <div class="col-md-8  mx-auto project-list">
+  <div class="col-md-8  mx-auto post-list">
     <h3>{{name}}'s Posts:</h3>
 
     {{#each posts as |post|}}
@@ -9,9 +9,8 @@
         <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
       </div>
       <div class="col-3 text-right">
-        <button class="btn btn-sm btn-info" data-id="{{post.id}}"><i class="fas fa-edit"></i></button>
-        <button class="btn btn-sm btn-danger" data-id="{{post.id}}"><i class="fas fa-trash-alt"></i></button>
-
+        <a class="btn btn-sm btn-info" href="/edit/{{post.id}}" edit-id="{{post.id}}"><i class="fas fa-edit"></i> Edit
+          Post</a>
       </div>
     </div>
     {{/each}}
@@ -19,28 +18,12 @@
   {{/if}}
 </div>
 <div class="row mt-4">
-
-  <div class="col-md-6  mx-auto">
-    <h3>Create a New Project:</h3>
-
-    <form class="form new-project-form">
-      <div class="form-group">
-        <label for="project-name">project name:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
-      </div>
-      <div class="form-group">
-        <label for="project-funding">needed funding ($):</label>
-        <input class="form-input" type="number" id="project-funding" name="project-funding" />
-      </div>
-      <div class="form-group">
-        <label for="project-desc">description:</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
+  <div class="col-md-6  text-center mx-auto">
+    <div class="form-group">
+      <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Create New Post</button>
+    </div>
   </div>
 </div>
-
+{{#if posts.length}}
 <script src="./js/dashboard.js"></script>
+{{/if}}

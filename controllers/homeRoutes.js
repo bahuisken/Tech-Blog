@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Post, User } = require('../models');
 const withAuth = require('../utils/auth');
 
+// Homepage Route
 router.get('/', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
@@ -30,6 +31,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Post by ID Route
 router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
@@ -55,6 +57,33 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+// Edit Post by ID Route
+router.get('/edit/:id', async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
+
+    const post = postData.get({ plain: true });
+
+    res.render('edit', {
+      ...post,
+      logged_in: req.session.logged_in,
+      homeActive: false,
+      dashActive: false,
+      loginActive: false
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Dashboard Route
 // Use withAuth middleware to prevent access to route
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
@@ -78,6 +107,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+
+// Login Route
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
