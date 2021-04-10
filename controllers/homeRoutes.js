@@ -57,6 +57,30 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+// Dashboard Route
+// Use withAuth middleware to prevent access to route
+router.get('/dashboard', withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Post }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('dashboard', {
+      ...user,
+      logged_in: true,
+      homeActive: false,
+      dashActive: true,
+      loginActive: false
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // Edit Post by ID Route
 router.get('/edit/:id', async (req, res) => {
   try {
@@ -83,23 +107,19 @@ router.get('/edit/:id', async (req, res) => {
   }
 });
 
-// Dashboard Route
-// Use withAuth middleware to prevent access to route
-router.get('/dashboard', withAuth, async (req, res) => {
+// New Post
+router.get('/new', async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Post }],
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('dashboard', {
-      ...user,
-      logged_in: true,
+    res.render('new', {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+      logged_in: req.session.logged_in,
       homeActive: false,
-      dashActive: true,
+      dashActive: false,
       loginActive: false
     });
   } catch (err) {
