@@ -11,3 +11,52 @@
   <p class="card-text">{{content}}</p>
 </div>
 </div>
+
+<div class="row mt-4" id="comment-btn-div">
+  <div class="col-md-6">
+    <div class="form-group">
+      <button class="btn btn-sm btn-success" id="comment-btn"><i class="fas fa-plus"></i> Add Comment</button>
+    </div>
+  </div>
+</div>
+
+<div class="card border-secondary mb-3" id="comment-form-holder">
+  <div class="card-body text-dark">
+    <form class="form comment-post-form" autocomplete="off">
+      <div class="form-group">
+        <label for="comment-body" class="font-weight-bold">Comment:</label>
+        <textarea class="form-control" id="comment-body" name="comment-body" rows="2"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="comment-name" class="font-weight-bold">Your Name:</label>
+        <input type="text" class="form-control" id="comment-name" name="comment-name" value="{{logged_name}}" {{#if
+          logged_name}}disabled{{/if}}>
+      </div>
+      <input type="hidden" value="{{id}}" id="post-id">
+      <div class="form-group">
+        <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Add Comment</button>&nbsp;
+        <a class="btn btn-sm btn-danger" id="comment-cancel-btn"><i class="fas fa-ban"></i> Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{{#if comments.length}}
+<div class="card border-secondary mb-3">
+  <div class="card-header text-white bg-secondary">
+    <div class="container">
+      <div class="row">
+        <div class="font-weight-bold col-6">Comments</div>
+
+      </div>
+    </div>
+  </div>
+  <div class="card-body text-dark">
+    {{#each comments as |comment|}}
+    {{> comments}}
+    {{/each}}
+  </div>
+</div>
+{{/if}}
+
+<script src="../js/comment.js"></script>

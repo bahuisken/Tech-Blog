@@ -7,17 +7,25 @@ module.exports = {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
   },
-  
+
   get_borderBg: () => {
     const randomNum = Math.random();
-    let borderBg = "primary";
+    let borderBg = 'primary';
 
     if (randomNum > 0.7) {
-      borderBg = "secondary";
+      borderBg = 'secondary';
     } else if (randomNum > 0.4) {
-      borderBg = "info";
+      borderBg = 'info';
     }
     return `<div class="card border-${borderBg} mb-3">
-    <div class="card-header text-white bg-${borderBg}">`
+    <div class="card-header text-white bg-${borderBg}">`;
+  },
+  trimString: (passedString) => {
+    var theString = passedString.substring(0, 150);
+    if (theString.length >= 150) {
+      return theString + '...';
+    } else {
+      return theString;
+    }
   },
 };

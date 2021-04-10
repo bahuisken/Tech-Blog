@@ -1,5 +1,3 @@
-
-
 //Edit / Update Post Function
 const editFormHandler = async (event) => {
   event.preventDefault();
@@ -11,7 +9,7 @@ const editFormHandler = async (event) => {
   if (id && title && content) {
     const response = await fetch(`/api/posts/${id}`, {
       method: 'PUT',
-      body: JSON.stringify({id, title, content }),
+      body: JSON.stringify({ id, title, content }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -42,10 +40,10 @@ const delButtonHandler = async (event) => {
   }
 };
 
-  document
+document
   .querySelector('.edit-post-form')
   .addEventListener('submit', editFormHandler);
 
-  document
+document
   .querySelector('.post-btns')
   .addEventListener('click', delButtonHandler);

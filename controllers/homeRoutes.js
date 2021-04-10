@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../models');
+const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Homepage Route
@@ -19,12 +19,12 @@ router.get('/', async (req, res) => {
     const posts = postData.map((post) => post.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('homepage', { 
-      posts, 
+    res.render('homepage', {
+      posts,
       logged_in: req.session.logged_in,
       homeActive: true,
       dashActive: false,
-      loginActive: false
+      loginActive: false,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -40,17 +40,23 @@ router.get('/post/:id', async (req, res) => {
           model: User,
           attributes: ['name'],
         },
+        {
+          model: Comment,
+          attributes: ['comment', 'user_name', 'date_created'],
+        },
       ],
     });
 
     const post = postData.get({ plain: true });
+    // const comments = commentData.get({ plain: true });
 
     res.render('post', {
       ...post,
+      logged_name: req.session.logged_name,
       logged_in: req.session.logged_in,
       homeActive: false,
       dashActive: false,
-      loginActive: false
+      loginActive: false,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -74,7 +80,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
       logged_in: true,
       homeActive: false,
       dashActive: true,
-      loginActive: false
+      loginActive: false,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -100,7 +106,7 @@ router.get('/edit/:id', async (req, res) => {
       logged_in: req.session.logged_in,
       homeActive: false,
       dashActive: false,
-      loginActive: false
+      loginActive: false,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -120,13 +126,12 @@ router.get('/new', async (req, res) => {
       logged_in: req.session.logged_in,
       homeActive: false,
       dashActive: false,
-      loginActive: false
+      loginActive: false,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 // Login Route
 router.get('/login', (req, res) => {
@@ -139,7 +144,7 @@ router.get('/login', (req, res) => {
   res.render('login', {
     homeActive: false,
     dashActive: false,
-    loginActive: true
+    loginActive: true,
   });
 });
 
