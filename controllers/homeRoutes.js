@@ -52,6 +52,7 @@ router.get('/post/:id', async (req, res) => {
 
     res.render('post', {
       ...post,
+      logged_id: req.session.user_id,
       logged_name: req.session.logged_name,
       logged_in: req.session.logged_in,
       homeActive: false,

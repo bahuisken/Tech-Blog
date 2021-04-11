@@ -20,12 +20,21 @@ module.exports = {
     return `<div class="card border-${borderBg} mb-3">
     <div class="card-header text-white bg-${borderBg}">`;
   },
+
   trimString: (passedString) => {
     var theString = passedString.substring(0, 150);
     if (theString.length >= 150) {
       return theString + '...';
     } else {
       return theString;
+    }
+  },
+
+  if_neq: (id1, id2) => {
+    if (id1 !== id2) {
+      return true;
+    } else {
+      return false;
     }
   },
 };

@@ -11,7 +11,7 @@
   <p class="card-text">{{content}}</p>
 </div>
 </div>
-
+{{#if (if_neq user_id logged_id)}}
 <div class="row mt-4" id="comment-btn-div">
   <div class="col-md-6">
     <div class="form-group">
@@ -19,7 +19,7 @@
     </div>
   </div>
 </div>
-
+{{/if}}
 <div class="card border-secondary mb-3" id="comment-form-holder">
   <div class="card-body text-dark">
     <form class="form comment-post-form" autocomplete="off">
