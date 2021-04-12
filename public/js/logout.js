@@ -14,13 +14,8 @@ const logout = async () => {
 
 const inactivityTime = () => {
   window.onload = timerReset;
-  document.onload = timerReset;
   document.onmousemove = timerReset;
-  document.onmousedown = timerReset; // touchscreen presses
-  document.ontouchstart = timerReset;
-  document.onclick = timerReset; // touchpad clicks
   document.onkeypress = timerReset;
-  document.addEventListener('scroll', timerReset, true); // improved; see comments
 };
 
 const timerReset = () => {
