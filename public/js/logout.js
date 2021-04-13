@@ -12,20 +12,6 @@ const logout = async () => {
   }
 };
 
-// const inactivityTime = () => {
-//   window.onload = timerReset;
-//   document.onmousemove = timerReset;
-//   document.onkeypress = timerReset;
-// };
-
-// const timerReset = () => {
-//   let time = 0;
-//   clearTimeout(time);
-//   time = setTimeout(logout, 15000);
-// };
-
-// inactivityTime();
-
 let inactivityTime = function () {
   let time;
   window.onload = resetTimer;
@@ -34,7 +20,7 @@ let inactivityTime = function () {
 
   function resetTimer() {
     clearTimeout(time);
-    time = setTimeout(logout, 10000);
+    time = setTimeout(logout, 300000);
   }
 };
 inactivityTime();
